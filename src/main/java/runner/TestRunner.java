@@ -6,7 +6,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features="C:\\Users\\sachin.mengade\\Desktop\\sachin\\1huddle-selenium\\src\\main\\java\\Features\\createContest.feature"
+		features="C:\\Users\\sachin.mengade\\Desktop\\sachin\\1huddle-selenium\\src\\main\\java\\Features\\Login.feature"
 		,glue= {"StepDefinition"}
 		)
 
