@@ -1,8 +1,12 @@
 Feature: Login fearure
-Scenario: Check if user is able to successfully login.
+Scenario Outline: Check if user is able to successfully login.
 
 Given user is already on login page
 When title of page is 1Huddle Admin
-Then user enters username and password
+Then user enters "<Username>" and "<Password>"
 And user clicks on login button
 Then user is on Dashboard page
+
+Examples: 
+       |Username|Password|
+       |sha@codewalla.com|pass123|

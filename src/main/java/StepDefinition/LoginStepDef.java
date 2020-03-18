@@ -56,17 +56,17 @@ public class LoginStepDef {
 		String pageTitle= driver.getTitle();
 		Assert.assertEquals("1Huddle Admin", pageTitle);
 	}
-	@Then("^user enters username and password")
-	public void user_enters_uname_pswd()
+	@Then("^user enters \"(.*)\" and \"(.*)\"$")
+	public void user_enters_uname_pswd(String username, String password)
 	{
 		
 		WebElement uname= driver.findElement(By.xpath("//input[@id='user-email']"));
-		uname.sendKeys("sha@codewalla.com");
+		uname.sendKeys(username);
 		next=driver.findElement(By.xpath("//button[@class=\"submit_icon mat-icon-button\"]"));
 		next.click();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		WebElement pswd=driver.findElement(By.xpath("//input[@id=\"user-password\"]"));		
-		pswd.sendKeys("pass123");			
+		pswd.sendKeys(password);			
 	}
 	@And("^user clicks on login button")
 	public void login()
