@@ -80,5 +80,10 @@ public class LoginStepDef {
 		String dashboard_text=driver.findElement(By.xpath("//li[@class=\"breadcrumb-item ng-star-inserted\"]")).getText();
 		Assert.assertEquals("Dashboard", dashboard_text);
 	}
+	@Then("^close the browser")
+	public void close()
+	{
+		driver.close();
+	}
 
 }
