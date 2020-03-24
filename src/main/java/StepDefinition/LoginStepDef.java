@@ -33,7 +33,8 @@ public class LoginStepDef {
 	{
 		//System.setProperty("webDriver.chrome.driver", "C:\\Users\\sachin.mengade\\Downloads\\chromedriver_win32\\chromedriver.exe");
 		try {
-			fp= new FileInputStream("C:\\Users\\sachin.mengade\\Desktop\\sachin\\1huddle-selenium\\config.properties");
+			//fp= new FileInputStream("C:\\Users\\sachin.mengade\\Desktop\\sachin\\1huddle-selenium\\config.properties");
+			 fp=new FileInputStream("E:\\1huddle\\Automation\\Selenium\\Selenium1Huddle\\config.properties");
 			prop= new Properties();
 			try {
 				prop.load(fp);
@@ -45,7 +46,8 @@ public class LoginStepDef {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 	}
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\sachin.mengade\\Downloads\\chromedriver_win32 (2)\\chromedriver.exe");
+		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\sachin.mengade\\Downloads\\chromedriver_win32 (2)\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "E:\\SOFTWARES\\chromedriver_win32\\chromedriver.exe");
 		driver= new ChromeDriver();
 		driver.get(prop.getProperty("url"));
 		
@@ -79,11 +81,6 @@ public class LoginStepDef {
 	{
 		String dashboard_text=driver.findElement(By.xpath("//li[@class=\"breadcrumb-item ng-star-inserted\"]")).getText();
 		Assert.assertEquals("Dashboard", dashboard_text);
-	}
-	@Then("^close the browser")
-	public void close()
-	{
-		driver.close();
 	}
 
 }
