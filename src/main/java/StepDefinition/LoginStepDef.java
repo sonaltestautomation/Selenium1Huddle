@@ -18,39 +18,21 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.graph.NetworkBuilder;
 
+import Base.BaseClass;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class LoginStepDef {
+public class LoginStepDef extends BaseClass {
 	WebDriver driver;
 	WebElement next;
-	Properties prop;
-	FileInputStream fp;
+	
 	@Given("^user is already on login page")
 	public void user_is_already_on_login_page()
 	{
-		//System.setProperty("webDriver.chrome.driver", "C:\\Users\\sachin.mengade\\Downloads\\chromedriver_win32\\chromedriver.exe");
-		try {
-			//fp= new FileInputStream("C:\\Users\\sachin.mengade\\Desktop\\sachin\\1huddle-selenium\\config.properties");
-			 fp=new FileInputStream("E:\\1huddle\\Automation\\Selenium\\Selenium1Huddle\\config.properties");
-			prop= new Properties();
-			try {
-				prop.load(fp);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-	}
-		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\sachin.mengade\\Downloads\\chromedriver_win32 (2)\\chromedriver.exe");
-		System.setProperty("webdriver.chrome.driver", "E:\\SOFTWARES\\chromedriver_win32\\chromedriver.exe");
-		driver= new ChromeDriver();
-		driver.get(prop.getProperty("url"));
-		
+		BaseClass base= new BaseClass();
+		base.initialization();
 	}
 	@When("^title of page is 1Huddle Admin")
 	public void page_title()
@@ -81,6 +63,11 @@ public class LoginStepDef {
 	{
 		String dashboard_text=driver.findElement(By.xpath("//li[@class=\"breadcrumb-item ng-star-inserted\"]")).getText();
 		Assert.assertEquals("Dashboard", dashboard_text);
+	}
+	@Then("^close the browser")
+	public void close_Browser()
+	{
+		driver.close();
 	}
 
 }
