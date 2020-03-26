@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.graph.NetworkBuilder;
 
 import Base.BaseClass;
+import Pages.LoginPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -27,6 +28,7 @@ import cucumber.api.java.en.When;
 public class LoginStepDef extends BaseClass {
 	WebDriver driver;
 	WebElement next;
+	LoginPage login;
 	
 	@Given("^user is already on login page")
 	public void user_is_already_on_login_page()
@@ -43,7 +45,7 @@ public class LoginStepDef extends BaseClass {
 	@Then("^user enters \"(.*)\" and \"(.*)\"$")
 	public void user_enters_uname_pswd(String username, String password)
 	{
-		
+		login=new LoginPage();
 		WebElement uname= driver.findElement(By.xpath("//input[@id='user-email']"));
 		uname.sendKeys(username);
 		next=driver.findElement(By.xpath("//button[@class=\"submit_icon mat-icon-button\"]"));
