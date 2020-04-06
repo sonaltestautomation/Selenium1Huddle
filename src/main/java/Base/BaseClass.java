@@ -11,8 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class BaseClass {
-	public WebDriver driver;
-	Properties prop;
+	public static WebDriver driver;
+	public static Properties prop;
 	FileInputStream fp;
 	
 	public BaseClass()

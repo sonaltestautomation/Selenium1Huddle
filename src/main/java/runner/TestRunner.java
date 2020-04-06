@@ -8,7 +8,7 @@ import cucumber.api.junit.Cucumber;
 @CucumberOptions(
 		//features="C:\\Users\\sachin.mengade\\Desktop\\sachin\\1huddle-selenium\\src\\main\\java\\Features\\Login.feature"
 		//,glue= {"StepDefinition"}
-		features="E:\\1huddle\\Automation\\Selenium\\Selenium1Huddle\\src\\main\\java\\Features\\Login.feature"
+		features="E:\\1huddle\\Automation\\Selenium\\Selenium1Huddle\\src\\main\\java\\Features\\Contest.feature"
 		,glue= {"StepDefinition"}
 		
 		)
