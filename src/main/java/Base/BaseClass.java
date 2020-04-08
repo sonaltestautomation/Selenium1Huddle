@@ -18,8 +18,8 @@ public class BaseClass {
 	public BaseClass()
 	{
 		try {
-			//fp= new FileInputStream("C:\\Users\\sachin.mengade\\Desktop\\sachin\\1huddle-selenium\\config.properties");
-			 fp=new FileInputStream("E:\\1huddle\\Automation\\Selenium\\Selenium1Huddle\\src\\main\\java\\config\\config.properties");
+			fp= new FileInputStream("C:\\Users\\sachin.mengade\\Desktop\\sachin\\1huddle-selenium\\Selenium1Huddle\\src\\main\\java\\config\\config.properties");
+			 //fp=new FileInputStream("E:\\1huddle\\Automation\\Selenium\\Selenium1Huddle\\src\\main\\java\\config\\config.properties");
 			prop= new Properties();
 			try {
 				prop.load(fp);
@@ -36,8 +36,8 @@ public class BaseClass {
 	
 public void initialization()
 {
-			//System.setProperty("webdriver.chrome.driver", "C:\\Users\\sachin.mengade\\Downloads\\chromedriver_win32 (2)\\chromedriver.exe");
-			System.setProperty("webdriver.chrome.driver", "E:\\SOFTWARES\\chromedriver_win32\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\sachin.mengade\\Downloads\\chromedriver_win32 (2)\\chromedriver.exe");
+			//System.setProperty("webdriver.chrome.driver", "E:\\SOFTWARES\\chromedriver_win32\\chromedriver.exe");
 			driver= new ChromeDriver();
 			driver.get(prop.getProperty("url"));
 			driver.manage().window().maximize();
