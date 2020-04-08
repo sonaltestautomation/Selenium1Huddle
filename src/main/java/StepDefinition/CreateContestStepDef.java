@@ -40,7 +40,7 @@ public class CreateContestStepDef extends BaseClass{
 	String contestStatustoVerify=contest_creation.checkContestStatus_Draft();
 	Assert.assertEquals("DRAFT",contestStatustoVerify );
 	String contestnameOnPage= driver.findElement(By.xpath("//div[contains(text(),'"+CreateContestPage.contestname+"')]")).getText();
-	Assert.assertEquals("Test Contest-Automation", contestnameOnPage);
+	Assert.assertEquals(prop.getProperty("contestName"), contestnameOnPage);
 	}
 
 	@Then("^admin schedules contest$")

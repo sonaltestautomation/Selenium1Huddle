@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -69,16 +70,18 @@ public class CreateContestPage extends BaseClass{
 	
 	@FindBy(xpath="//span[contains(text(),' Location ')]")
 	WebElement location;
-	
+		
 	@FindBy(xpath="(//div[@class='mat-checkbox-inner-container mat-checkbox-inner-container-no-side-margin'])[1]")
 	WebElement all;
-	
+		
 	@FindBy(xpath="//mat-toolbar[contains(text(),'DONE')]")
 	WebElement doneButton;
 	
 	@FindBy(xpath="//span[contains(text(),' Department ')]")
 	WebElement department;
 	
+	@FindBy(xpath="//span[contains(text(),'SCHEDULE')]")
+	WebElement schedule;
 	public static String contestname=prop.getProperty("contestName");
 	WebDriverWait wait;
 	
@@ -163,12 +166,19 @@ public class CreateContestPage extends BaseClass{
 		jse2.executeScript("arguments[0].click();", doneButton); 
 		jse2.executeScript("arguments[0].click();", chips); 
 		TestUtil.click_on_Element(department);
-		//TestUtil.click_on_Element(all);
-		//TestUtil.click_on_Element(doneButton);
-		jse2.executeScript("arguments[0].scrollIntoView()", all); 
-		jse2.executeScript("arguments[0].click();", all); 
+		//jse2.executeScript("arguments[0].scrollIntoView()", all); 
+		//wait= new WebDriverWait(driver,60);
+		//wait.until(ExpectedConditions.elementToBeClickable(all)).click();
+		//wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@class='mat-checkbox-inner-container mat-checkbox-inner-container-no-side-margin'])[1]")));		
+		//TestUtil.scrollByVisibleElement(all);
+		//all.click();	
+		//jse2.executeScript("arguments[0].scrollIntoView()", allDept); 
+		WebElement ele= driver.findElement(By.xpath("(//div[@class='mat-checkbox-inner-container mat-checkbox-inner-container-no-side-margin'])[1]"));
+	    jse2.executeScript("arguments[0].click();", ele); 
 		jse2.executeScript("arguments[0].click();", doneButton); 
 		TestUtil.click_on_Element(submit);
+		
+		//TestUtil.click_on_Element(schedule);
 	}
 	
 	
