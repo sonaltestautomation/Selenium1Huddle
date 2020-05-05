@@ -1,11 +1,12 @@
 package StepDefinition;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 
 import Base.BaseClass;
 import Pages.CreateContestPage;
 import Pages.LoginPage;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
@@ -47,15 +48,38 @@ public class CreateContestStepDef extends BaseClass{
 	public void admin_schedules_contest() {
 		
 		contest_creation= new CreateContestPage();
-		contest_creation.scheduleContest();
+		String scheduleConfirmation=contest_creation.scheduleContest();
+		Assert.assertEquals(scheduleConfirmation, "Contest created successfully");
 	    
 	}
 
 	@Then("^check contest status after scheduling contest$")
 	public void check_contest_status_after_scheduling_contest() {
-	   
+		contest_creation= new CreateContestPage();
+		String contestStatusAfterScheduling=contest_creation.checkContestStatus_Ready();
+		Assert.assertEquals("READY",contestStatusAfterScheduling);
+		
 	}
-
+	@Then("^move contest to DRAFT state")
+	public void contest_to_DRAFT()
+	{
+		contest_creation= new CreateContestPage();
+		contest_creation.ready_To_Draft();
+		String contestStatustoVerify=contest_creation.checkContestStatus_Draft();
+		Assert.assertEquals("DRAFT",contestStatustoVerify );
+	}
+	@And("^Delete the contest")
+	public void deleteContest()
+	{
+		contest_creation= new CreateContestPage(); 
+		String deleteConfirmation=contest_creation.delete_Contest();
+		Assert.assertEquals("Contest Deleted Successfully.",deleteConfirmation);		
+	}
+	@Then("^close the chromebrowser")
+	public void close()
+	{
+		driver.close();
+	}
 
 
 }

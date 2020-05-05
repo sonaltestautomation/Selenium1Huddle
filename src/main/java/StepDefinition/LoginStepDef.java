@@ -1,5 +1,6 @@
 package StepDefinition;
-import org.junit.Assert;
+import org.testng.Assert;
+
 import Base.BaseClass;
 import Pages.LoginPage;
 import cucumber.api.java.en.Given;

@@ -1,24 +1,12 @@
 package Pages;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.paulhammant.ngwebdriver.NgWebDriver;
-
 import Base.BaseClass;
 import Util.TestUtil;
 
@@ -88,6 +76,9 @@ public class CreateContestPage extends BaseClass{
 	@FindBy(xpath="//button[@class=\"add-game addEntity mat-fab mat-accent ng-star-inserted\"]")
 	WebElement addGame;
 	
+	@FindBy(xpath="//button[@class='options-menu-item mat-menu-item ng-star-inserted']")
+	WebElement movetoDraft;
+	
 	public static String contestname=prop.getProperty("contestName");
 	WebDriverWait wait;
 	
@@ -124,21 +115,20 @@ public class CreateContestPage extends BaseClass{
 		String contestStatusText=contestStatus.getText();
 		return contestStatusText;
 	}
-	public void scheduleContest() 
+	public String scheduleContest() 
 	{
 		//JavascriptExecutor jse2 = (JavascriptExecutor)driver;
 		//ngdriver=new NgWebDriver(jse2);
 		WebElement contestnameOnPage= driver.findElement(By.xpath("//div[contains(text(),'"+CreateContestPage.contestname+"')]"));
 		TestUtil.click_on_Element(contestnameOnPage);
-		TestUtil.click_on_Element(rules);
-		ruleInputBox.clear();
-		TestUtil.enterText(ruleInputBox, prop.getProperty("rules"));	
+		jse2.executeScript("arguments[0].click();", rules); 
+		//jse2.executeScript("arguments[1].value = arguments[0]; ", "Testing rule for contest", rules);   
+		//rules.clear();
+		TestUtil.enterText(ruleInputBox, prop.getProperty("rules"));
 		TestUtil.click_on_Element(submit);		
 		jse2.executeScript("arguments[0].click();", reward); 
-		jse2.executeScript("arguments[0].click();", category); 
-		
-		List<WebElement> categories=driver.findElements(By.xpath("//span[@class=\"title\"]"));
-		
+		jse2.executeScript("arguments[0].click();", category); 		
+		List<WebElement> categories=driver.findElements(By.xpath("//span[@class=\"title\"]"));	
 		for(WebElement category:categories)
 		{
 			if(category.getAttribute("innerHTML").contains(" Cash "))
@@ -159,7 +149,7 @@ public class CreateContestPage extends BaseClass{
 				break;
 			}
 		}
-		TestUtil.click_on_Element(submit);
+		jse2.executeScript("arguments[0].click();", submit); 
 		jse2.executeScript("arguments[0].click();", addPlayers); 
 		jse2.executeScript("arguments[0].click();", chips); 
 		TestUtil.click_on_Element(location);
@@ -167,18 +157,42 @@ public class CreateContestPage extends BaseClass{
 		jse2.executeScript("arguments[0].click();", doneButton); 
 		jse2.executeScript("arguments[0].click();", chips); 
 		jse2.executeScript("arguments[0].click();", department); 	
-		ngdriver.waitForAngularRequestsToFinish();
-		//wait= new WebDriverWait(driver,60);
-		//wait.until(ExpectedConditions.elementToBeClickable(all)).click();
-		jse2.executeScript("arguments[0].click();", all); 	
+		//ngdriver.waitForAngularRequestsToFinish();
+		wait= new WebDriverWait(driver,60);
+		wait.until(ExpectedConditions.elementToBeClickable(all)).click();
+		//jse2.executeScript("arguments[0].click();", all); 	
+		//jse2.executeAsyncScript("arguments[0].click();", all);
+		//ngdriver.waitForAngularRequestsToFinish();
 		jse2.executeScript("arguments[0].click();", doneButton); 
 		TestUtil.click_on_Element(submit);
 		TestUtil.click_on_Element(addGame);
 		WebElement ele= driver.findElement(By.xpath("(//div[@class='mat-checkbox-inner-container mat-checkbox-inner-container-no-side-margin'])[1]"));
 		jse2.executeScript("arguments[0].click();", ele); 
-		TestUtil.click_on_Element(submit);
-		
-		TestUtil.click_on_Element(schedule);
+		TestUtil.click_on_Element(submit);	
+		TestUtil.click_on_Element(schedule);	
+		//Thread.sleep(1000);
+		String textOnSchedule=driver.findElement(By.xpath("//span[contains(text(),'Contest created successfully')]")).getText();
+		return textOnSchedule;
+	}
+	public void ready_To_Draft()
+	{
+		driver.findElement(By.xpath("//div[contains(text(),'"+contestname+"')]/ancestor::div[@class='contest-wrapper']//preceding-sibling::div[@class='image-wrapper']//parent::figure//child::span[contains(text(),'READY')]/parent::figure//child::button")).click();
+		TestUtil.click_on_Element(movetoDraft);
+		driver.findElement(By.xpath("//span[contains(text(),'YES')]")).click();	
+	}
+	public String delete_Contest()
+	{
+		driver.findElement(By.xpath("//div[contains(text(),'"+contestname+"')]/ancestor::div[@class='contest-wrapper']//preceding-sibling::div[@class='image-wrapper']//parent::figure//child::span[contains(text(),'DRAFT')]/parent::figure//child::button")).click();
+		driver.findElement(By.xpath("//span[contains(text(),'Delete')]")).click();
+		driver.findElement(By.xpath("//span[contains(text(),'YES')]")).click();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String textOnDelete=driver.findElement(By.xpath("//span[contains(text(),'Contest Deleted Successfully')]")).getText();
+		return textOnDelete;
 	}
 	
 	

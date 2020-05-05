@@ -8,3 +8,4 @@ And admin schedules contest
 Then check contest status after scheduling contest
 Then move contest to DRAFT state
 And Delete the contest
+Then close the chromebrowser
