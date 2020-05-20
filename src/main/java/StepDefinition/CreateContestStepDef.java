@@ -1,14 +1,15 @@
 package StepDefinition;
 
 import org.openqa.selenium.By;
-import org.testng.Assert;
-
 import Base.BaseClass;
 import Pages.CreateContestPage;
 import Pages.LoginPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+
+import org.junit.Assert; 
+
 
 public class CreateContestStepDef extends BaseClass{
 	LoginPage login;
@@ -49,8 +50,7 @@ public class CreateContestStepDef extends BaseClass{
 		
 		contest_creation= new CreateContestPage();
 		String scheduleConfirmation=contest_creation.scheduleContest();
-		Assert.assertEquals(scheduleConfirmation, "Contest created successfully");
-	    
+		Assert.assertEquals(scheduleConfirmation, "Contest created successfully");	    
 	}
 
 	@Then("^check contest status after scheduling contest$")
@@ -59,6 +59,18 @@ public class CreateContestStepDef extends BaseClass{
 		String contestStatusAfterScheduling=contest_creation.checkContestStatus_Ready();
 		Assert.assertEquals("READY",contestStatusAfterScheduling);
 		
+	}
+	@And("^admin applies contest name and state filters to search contest")
+	public void apply_filters()
+	{
+		contest_creation= new CreateContestPage();
+		contest_creation.contest_filters();
+	} 
+	@Then("^verifies if contest exists")
+	public void verification_of_createdContest()
+	{
+		String contestName=driver.findElement(By.xpath("//div[contains(text(),'"+CreateContestPage.contestname+"')]")).getText();
+		Assert.assertEquals(prop.getProperty("contestName"), contestName);
 	}
 	@Then("^move contest to DRAFT state")
 	public void contest_to_DRAFT()
@@ -73,13 +85,15 @@ public class CreateContestStepDef extends BaseClass{
 	{
 		contest_creation= new CreateContestPage(); 
 		String deleteConfirmation=contest_creation.delete_Contest();
-		Assert.assertEquals("Contest Deleted Successfully.",deleteConfirmation);		
+		Assert.assertEquals(deleteConfirmation,"Contest Deleted Successfully.");		
 	}
 	@Then("^close the chromebrowser")
 	public void close()
 	{
 		driver.close();
 	}
-
+	
+	
+	
 
 }

@@ -79,8 +79,18 @@ public class CreateContestPage extends BaseClass{
 	@FindBy(xpath="//button[@class='options-menu-item mat-menu-item ng-star-inserted']")
 	WebElement movetoDraft;
 	
+	@FindBy(xpath="//input[@id='chips']")
+	WebElement contestFilterChip;
+	
+	@FindBy(xpath="//mat-option[contains(@id,'mat')]//child::span[contains(text(),'Contest')]")
+	WebElement contestNameFilter;
+	
+	@FindBy(xpath="//span[contains(text(),'State')]")
+	WebElement stateFilter;
+	
 	public static String contestname=prop.getProperty("contestName");
 	WebDriverWait wait;
+	
 	
 	public CreateContestPage()
 	{
@@ -170,13 +180,30 @@ public class CreateContestPage extends BaseClass{
 		jse2.executeScript("arguments[0].click();", ele); 
 		TestUtil.click_on_Element(submit);	
 		TestUtil.click_on_Element(schedule);	
-		//Thread.sleep(1000);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String textOnSchedule=driver.findElement(By.xpath("//span[contains(text(),'Contest created successfully')]")).getText();
 		return textOnSchedule;
 	}
+	public void contest_filters()
+	{
+		TestUtil.click_on_Element(contestFilterChip);
+		TestUtil.click_on_Element(contestNameFilter);
+		driver.findElement(By.xpath("//input[@name='search-key']")).sendKeys(prop.getProperty("contestName"));
+		driver.findElement(By.xpath("//mat-icon[contains(text(),'done')]")).click();
+		driver.findElement(By.xpath("//input[@id='chips']")).click();
+		TestUtil.click_on_Element(stateFilter);
+		driver.findElement(By.xpath("//mat-list[@role='list']//child::div[contains(text(),'Ready')]")).click();		
+		driver.findElement(By.xpath("//span[contains(text(),'State')]//following-sibling::mat-icon[contains(text(),'cancel')]")).click();
+	}
 	public void ready_To_Draft()
 	{
-		driver.findElement(By.xpath("//div[contains(text(),'"+contestname+"')]/ancestor::div[@class='contest-wrapper']//preceding-sibling::div[@class='image-wrapper']//parent::figure//child::span[contains(text(),'READY')]/parent::figure//child::button")).click();
+		WebElement toDraft=driver.findElement(By.xpath("//div[contains(text(),'"+contestname+"')]/ancestor::div[@class='contest-wrapper']//preceding-sibling::div[@class='image-wrapper']//parent::figure//child::span[contains(text(),'READY')]/parent::figure//child::button"));
+		toDraft.click();
 		TestUtil.click_on_Element(movetoDraft);
 		driver.findElement(By.xpath("//span[contains(text(),'YES')]")).click();	
 	}
@@ -186,7 +213,7 @@ public class CreateContestPage extends BaseClass{
 		driver.findElement(By.xpath("//span[contains(text(),'Delete')]")).click();
 		driver.findElement(By.xpath("//span[contains(text(),'YES')]")).click();
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(1500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -195,10 +222,4 @@ public class CreateContestPage extends BaseClass{
 		return textOnDelete;
 	}
 	
-	
-	
-	
-	
-	
-
 }

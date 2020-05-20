@@ -1,11 +1,13 @@
 package StepDefinition;
-import org.testng.Assert;
 
 import Base.BaseClass;
 import Pages.LoginPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
+import org.junit.Assert; 
+
 
 public class LoginStepDef extends BaseClass {
 	
@@ -23,6 +25,7 @@ public class LoginStepDef extends BaseClass {
 		login=new LoginPage();
 		String pageTitle= login.homepageTitle();
 		Assert.assertEquals("1Huddle Admin",pageTitle);
+
 	}
 	@Then("^user logs into app")
 	public void user_logsIn()
