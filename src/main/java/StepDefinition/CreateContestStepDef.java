@@ -50,7 +50,7 @@ public class CreateContestStepDef extends BaseClass{
 		
 		contest_creation= new CreateContestPage();
 		String scheduleConfirmation=contest_creation.scheduleContest();
-		Assert.assertEquals(scheduleConfirmation, "Contest created successfully");	    
+		Assert.assertEquals(scheduleConfirmation, "Congrats! You created a contest!");	    
 	}
 
 	@Then("^check contest status after scheduling contest$")

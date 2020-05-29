@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>FreeCrmBDDFramework</groupId>
-	<artifactId>FreeCrmBDDFramework</artifactId>
+	<groupId>1Huddle</groupId>
+	<artifactId>1Huddle</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>FreeCrmBDDFramework</name>
+	<name>1Huddle</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -69,15 +69,15 @@
 </dependency>
 
 <dependency>
- <groupId>com.vimalselvam</groupId>
- <artifactId>cucumber-extentsreport</artifactId>
- <version>3.0.2</version>
+ 	<groupId>com.vimalselvam</groupId>
+ 	<artifactId>cucumber-extentsreport</artifactId>
+ 	<version>3.0.2</version>
 </dependency>
 
 <dependency>
-<groupId>com.aventstack</groupId>
-<artifactId>extentreports</artifactId>
-<version>4.0.8</version>
+	<groupId>com.aventstack</groupId>
+	<artifactId>extentreports</artifactId>
+	<version>4.0.8</version>
 </dependency>
 
   </dependencies>

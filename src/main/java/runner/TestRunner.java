@@ -4,7 +4,10 @@ import java.io.File;
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 
+//import com.vimalselvam.cucumber.listener.Reporter;
+
 import com.cucumber.listener.Reporter;
+
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -19,6 +22,7 @@ import cucumber.api.junit.Cucumber;
 		glue= {"StepDefinition"},
 		//plugin= {"pretty","html:test-output","com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/extentReport.html"}
 		plugin= {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/extentReport.html"}
+		
 		)
 
 public class TestRunner{

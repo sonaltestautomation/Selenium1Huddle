@@ -1,7 +1,9 @@
 package Pages;
+import java.net.SocketException;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -167,6 +169,7 @@ public class CreateContestPage extends BaseClass{
 		jse2.executeScript("arguments[0].click();", doneButton); 
 		jse2.executeScript("arguments[0].click();", chips); 
 		jse2.executeScript("arguments[0].click();", department); 	
+		TestUtil.handle_StaleEle_Exception(department);
 		//ngdriver.waitForAngularRequestsToFinish();
 		wait= new WebDriverWait(driver,60);
 		wait.until(ExpectedConditions.elementToBeClickable(all)).click();
@@ -179,14 +182,16 @@ public class CreateContestPage extends BaseClass{
 		WebElement ele= driver.findElement(By.xpath("(//div[@class='mat-checkbox-inner-container mat-checkbox-inner-container-no-side-margin'])[1]"));
 		jse2.executeScript("arguments[0].click();", ele); 
 		TestUtil.click_on_Element(submit);	
-		TestUtil.click_on_Element(schedule);	
+		TestUtil.click_on_Element(schedule);		
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String textOnSchedule=driver.findElement(By.xpath("//span[contains(text(),'Contest created successfully')]")).getText();
+		String textOnSchedule=driver.findElement(By.xpath("//span[contains(text(),'Congrats! You created a contest!')]")).getText();
+		WebElement ok_popup= driver.findElement(By.xpath("//span[contains(text(),'OK')]"));
+		jse2.executeScript("arguments[0].click();", ok_popup); 
 		return textOnSchedule;
 	}
 	public void contest_filters()
@@ -199,12 +204,21 @@ public class CreateContestPage extends BaseClass{
 		TestUtil.click_on_Element(stateFilter);
 		driver.findElement(By.xpath("//mat-list[@role='list']//child::div[contains(text(),'Ready')]")).click();		
 		driver.findElement(By.xpath("//span[contains(text(),'State')]//following-sibling::mat-icon[contains(text(),'cancel')]")).click();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	public void ready_To_Draft()
-	{
+	public void ready_To_Draft() 
+	{	
 		WebElement toDraft=driver.findElement(By.xpath("//div[contains(text(),'"+contestname+"')]/ancestor::div[@class='contest-wrapper']//preceding-sibling::div[@class='image-wrapper']//parent::figure//child::span[contains(text(),'READY')]/parent::figure//child::button"));
-		toDraft.click();
-		TestUtil.click_on_Element(movetoDraft);
+		TestUtil.handle_StaleEle_Exception(toDraft);
+		//WebElement toDraft=driver.findElement(By.xpath("//div[contains(text(),'"+contestname+"')]/ancestor::div[@class='contest-wrapper']//preceding-sibling::div[@class='image-wrapper']//parent::figure//child::span[contains(text(),'READY')]/parent::figure//child::button"));
+		//toDraft.click();
+		TestUtil.handle_StaleEle_Exception(movetoDraft);
+		//TestUtil.click_on_Element(movetoDraft);
 		driver.findElement(By.xpath("//span[contains(text(),'YES')]")).click();	
 	}
 	public String delete_Contest()
